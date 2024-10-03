@@ -6,9 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Jenny Luu">
 
-<title>Lab 1: Gapminder Data Visualization</title>
+<title>Working with Data of Global Indicators - Gapminder</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -83,19 +82,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Lab 1: Gapminder Data Visualization</h1>
+<h1 class="title">Working with Data of Global Indicators - Gapminder</h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Jenny Luu </p>
-          </div>
-  </div>
     
   
     
@@ -106,15 +99,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<div id="2a832f8041e8cd72" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2024-09-26T21:51:33.951420Z&quot;,&quot;start_time&quot;:&quot;2024-09-26T21:51:33.947654Z&quot;}" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.api <span class="im">as</span> sm</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> plotnine <span class="im">import</span> ggplot, aes, geom_jitter, geom_point, scale_size, scale_color_manual, labs, theme_minimal, scale_x_continuous, scale_y_continuous</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="508d8983" class="cell" data-vscode="{&quot;languageId&quot;:&quot;yaml&quot;}" data-execution_count="89">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">---</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>title: <span class="st">"Lab 1 Gapminder Data Visualization"</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>author: <span class="st">"Jenny Luu"</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>date: <span class="st">"2024-10-02"</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>output:</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  html_document:</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    theme: <span class="st">"minty"</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    embed<span class="op">-</span>resources: true</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="op">---</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<div class="ansi-escaped-output">
+<pre><span class="ansi-cyan-fg">  Cell </span><span class="ansi-green-fg">In[89], line 1</span>
+
+<span class="ansi-red-fg">    ---</span>
+
+       ^
+
+<span class="ansi-red-fg">SyntaxError</span><span class="ansi-red-fg">:</span> invalid syntax
+</pre>
 </div>
-<section id="working-with-data-of-global-indicators---gapminder" class="level2">
-<h2 class="anchored" data-anchor-id="working-with-data-of-global-indicators---gapminder">Working with Data of Global Indicators - Gapminder</h2>
+</div>
+</div>
+<div id="2a832f8041e8cd72" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2024-09-26T21:51:33.951420Z&quot;,&quot;start_time&quot;:&quot;2024-09-26T21:51:33.947654Z&quot;}" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.api <span class="im">as</span> sm</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> plotnine <span class="im">import</span> ggplot, aes, geom_jitter, geom_point, scale_size, scale_color_manual, labs, theme_minimal, scale_x_continuous, scale_y_continuous</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>“Gapminder identifies systematic misconceptions about important global trends and proportions and uses reliable data to develop easy to understand teaching materials to rid people of their misconceptions.”</p>
-</section>
 <section id="task-1" class="level2">
 <h2 class="anchored" data-anchor-id="task-1">Task 1</h2>
 <p>Below is a plot of a visualization in Gapminder (the default/starting one actually). Look it over and take note of the variables being visualized.</p>
@@ -135,8 +148,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Import the q1data.csv dataset.</li>
 </ol>
 <div id="57843a6cb4296435" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2024-09-26T21:51:33.990702Z&quot;,&quot;start_time&quot;:&quot;2024-09-26T21:51:33.979436Z&quot;}" data-execution_count="31">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>q1data <span class="op">=</span> pd.read_csv(<span class="st">'Data/q1data.csv'</span>)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>q1data.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>q1data <span class="op">=</span> pd.read_csv(<span class="st">'Data/q1data.csv'</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>q1data.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 
@@ -228,7 +241,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Lab01_files/figure-html/cell-3-output-3.png" class="img-fluid figure-img"></p>
+<p><img src="Lab01_files/figure-html/cell-4-output-3.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
@@ -239,41 +252,41 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Sources: https://datacarpentry.org/python-ecology-lesson/07-visualization-ggplot-python.html</p>
 <p>https://stackoverflow.com/questions/73632511/how-do-i-set-scaling-for-axes-using-plotnine</p>
 <div id="96fa5a3d" class="cell" data-execution_count="28">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> plotnine <span class="im">import</span> ggplot, aes, geom_point, scale_size_continuous, scale_x_log10, scale_fill_manual, labs, theme_minimal, annotate, guides, theme</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>region_colors <span class="op">=</span> {</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Africa'</span>: <span class="st">'#377eb8'</span>,    </span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Asia'</span>: <span class="st">'#e41a1c'</span>,      </span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Europe'</span>: <span class="st">'#ffeb00'</span>,    </span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Americas'</span>: <span class="st">'#4daf4a'</span>   </span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>q1data[<span class="st">'four_regions'</span>] <span class="op">=</span> q1data[<span class="st">'four_regions'</span>].<span class="bu">str</span>.capitalize()</span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>plot <span class="op">=</span> (ggplot(q1data.dropna(), aes(x<span class="op">=</span><span class="st">'income'</span>, y<span class="op">=</span><span class="st">'life_exp'</span>, size<span class="op">=</span><span class="st">'population'</span>, fill<span class="op">=</span><span class="st">'four_regions'</span>))</span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> geom_point(alpha<span class="op">=</span><span class="fl">0.8</span>)</span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> scale_size_continuous(<span class="bu">range</span><span class="op">=</span>[<span class="dv">1</span>, <span class="dv">15</span>])  </span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> theme_minimal()</span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> labs(x<span class="op">=</span><span class="st">'Income'</span>, y<span class="op">=</span><span class="st">'Life Expectancy'</span>, </span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>               fill<span class="op">=</span><span class="st">'Region'</span>,</span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>               title<span class="op">=</span><span class="st">"Global Life Expectancy vs Income: A Population Perspective"</span>)</span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> guides(size<span class="op">=</span><span class="va">False</span>)  </span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> scale_x_log10(breaks<span class="op">=</span>[<span class="dv">500</span>, <span class="dv">1000</span>, <span class="dv">2000</span>, <span class="dv">4000</span>, <span class="dv">8000</span>, <span class="dv">16000</span>, <span class="dv">32000</span>, <span class="dv">64000</span>])</span>
-<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> annotate(<span class="st">"text"</span>, x<span class="op">=</span><span class="dv">10000</span>, y<span class="op">=</span><span class="dv">65</span>, label<span class="op">=</span><span class="st">"2010"</span>, </span>
-<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>                   size<span class="op">=</span><span class="dv">80</span>, color<span class="op">=</span><span class="st">"grey"</span>, alpha<span class="op">=</span><span class="fl">0.2</span>, ha<span class="op">=</span><span class="st">'center'</span>)</span>
-<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> annotate(<span class="st">"text"</span>, x<span class="op">=</span><span class="dv">60000</span>, y<span class="op">=</span><span class="dv">45</span>, label<span class="op">=</span><span class="st">"*Bubble size reflects population size"</span>, </span>
-<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>                   size<span class="op">=</span><span class="dv">8</span>, color<span class="op">=</span><span class="st">"black"</span>, alpha<span class="op">=</span><span class="fl">0.8</span>, ha<span class="op">=</span><span class="st">'right'</span>)</span>
-<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> scale_fill_manual(values<span class="op">=</span>region_colors)  </span>
-<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> theme(legend_position<span class="op">=</span><span class="st">'right'</span>))</span>
-<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> plotnine <span class="im">import</span> ggplot, aes, geom_point, scale_size_continuous, scale_x_log10, scale_fill_manual, labs, theme_minimal, annotate, guides, theme</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>region_colors <span class="op">=</span> {</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Africa'</span>: <span class="st">'#377eb8'</span>,    </span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Asia'</span>: <span class="st">'#e41a1c'</span>,      </span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Europe'</span>: <span class="st">'#ffeb00'</span>,    </span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Americas'</span>: <span class="st">'#4daf4a'</span>   </span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>q1data[<span class="st">'four_regions'</span>] <span class="op">=</span> q1data[<span class="st">'four_regions'</span>].<span class="bu">str</span>.capitalize()</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>plot <span class="op">=</span> (ggplot(q1data.dropna(), aes(x<span class="op">=</span><span class="st">'income'</span>, y<span class="op">=</span><span class="st">'life_exp'</span>, size<span class="op">=</span><span class="st">'population'</span>, fill<span class="op">=</span><span class="st">'four_regions'</span>))</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> geom_point(alpha<span class="op">=</span><span class="fl">0.8</span>)</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> scale_size_continuous(<span class="bu">range</span><span class="op">=</span>[<span class="dv">1</span>, <span class="dv">15</span>])  </span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> theme_minimal()</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> labs(x<span class="op">=</span><span class="st">'Income'</span>, y<span class="op">=</span><span class="st">'Life Expectancy'</span>, </span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>               fill<span class="op">=</span><span class="st">'Region'</span>,</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>               title<span class="op">=</span><span class="st">"Global Life Expectancy vs Income: A Population Perspective"</span>)</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> guides(size<span class="op">=</span><span class="va">False</span>)  </span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> scale_x_log10(breaks<span class="op">=</span>[<span class="dv">500</span>, <span class="dv">1000</span>, <span class="dv">2000</span>, <span class="dv">4000</span>, <span class="dv">8000</span>, <span class="dv">16000</span>, <span class="dv">32000</span>, <span class="dv">64000</span>])</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> annotate(<span class="st">"text"</span>, x<span class="op">=</span><span class="dv">10000</span>, y<span class="op">=</span><span class="dv">65</span>, label<span class="op">=</span><span class="st">"2010"</span>, </span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>                   size<span class="op">=</span><span class="dv">80</span>, color<span class="op">=</span><span class="st">"grey"</span>, alpha<span class="op">=</span><span class="fl">0.2</span>, ha<span class="op">=</span><span class="st">'center'</span>)</span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> annotate(<span class="st">"text"</span>, x<span class="op">=</span><span class="dv">60000</span>, y<span class="op">=</span><span class="dv">45</span>, label<span class="op">=</span><span class="st">"*Bubble size reflects population size"</span>, </span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>                   size<span class="op">=</span><span class="dv">8</span>, color<span class="op">=</span><span class="st">"black"</span>, alpha<span class="op">=</span><span class="fl">0.8</span>, ha<span class="op">=</span><span class="st">'right'</span>)</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> scale_fill_manual(values<span class="op">=</span>region_colors)  </span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> theme(legend_position<span class="op">=</span><span class="st">'right'</span>))</span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>/opt/anaconda3/lib/python3.12/pprint.py:632: FutureWarning: Using repr(plot) to draw and show the plot figure is deprecated and will be removed in a future version. Use plot.show().</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Lab01_files/figure-html/cell-4-output-2.png" class="img-fluid figure-img"></p>
+<p><img src="Lab01_files/figure-html/cell-5-output-2.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
@@ -283,44 +296,44 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ol>
 <p>Besides using <code>geom_point</code>, another option would be to use <code>geom_jitter</code> and <code>geom_line</code> plots together. While a line plot (<code>geom_line</code>) alone can show trends or connections across data points, it lacks the ability to indicate population size. This is why it’s beneficial to integrate <code>geom_jitter</code>—to help spread the data points and show population size through bubble size. Combining these geometries provides both a sense of relationships between variables (through the line plot) and an understanding of data density or importance (through the size of the jittered points).</p>
 <div id="2798872e" class="cell" data-execution_count="24">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> plotnine <span class="im">import</span> ggplot, aes, geom_point, geom_line, geom_jitter, scale_size_continuous, scale_x_log10, scale_fill_manual, scale_color_manual, labs, theme_minimal, annotate, guides, theme</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>region_colors <span class="op">=</span> {</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Africa'</span>: <span class="st">'#377eb8'</span>,    </span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Asia'</span>: <span class="st">'#e41a1c'</span>,     </span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Europe'</span>: <span class="st">'#ffeb00'</span>,   </span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Americas'</span>: <span class="st">'#4daf4a'</span>   </span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>q1data[<span class="st">'four_regions'</span>] <span class="op">=</span> q1data[<span class="st">'four_regions'</span>].<span class="bu">str</span>.capitalize()</span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>plot <span class="op">=</span> (ggplot(q1data.dropna(), aes(x<span class="op">=</span><span class="st">'income'</span>, y<span class="op">=</span><span class="st">'life_exp'</span>, size<span class="op">=</span><span class="st">'population'</span>, fill<span class="op">=</span><span class="st">'four_regions'</span>, color<span class="op">=</span><span class="st">'four_regions'</span>))</span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> geom_point(alpha<span class="op">=</span><span class="fl">0.8</span>)  <span class="co"># Main points (bubbles)</span></span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> geom_line(aes(group<span class="op">=</span><span class="st">'four_regions'</span>), alpha<span class="op">=</span><span class="fl">0.5</span>)  </span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> geom_jitter(width<span class="op">=</span><span class="fl">0.1</span>, height<span class="op">=</span><span class="fl">0.1</span>, alpha<span class="op">=</span><span class="fl">0.4</span>)  </span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> scale_size_continuous(<span class="bu">range</span><span class="op">=</span>[<span class="dv">1</span>, <span class="dv">15</span>])  </span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> theme_minimal()</span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> labs(x<span class="op">=</span><span class="st">'Income'</span>, y<span class="op">=</span><span class="st">'Life Expectancy'</span>, </span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>               fill<span class="op">=</span><span class="st">'Region'</span>, color<span class="op">=</span><span class="st">'Region'</span>,</span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>               title<span class="op">=</span><span class="st">"Global Life Expectancy vs Income: A Population Perspective"</span>)</span>
-<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> guides(size<span class="op">=</span><span class="va">False</span>)  <span class="co"># Remove the population (size) legend</span></span>
-<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> scale_x_log10(breaks<span class="op">=</span>[<span class="dv">500</span>, <span class="dv">1000</span>, <span class="dv">2000</span>, <span class="dv">4000</span>, <span class="dv">8000</span>, <span class="dv">16000</span>, <span class="dv">32000</span>, <span class="dv">64000</span>])</span>
-<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> annotate(<span class="st">"text"</span>, x<span class="op">=</span><span class="dv">10000</span>, y<span class="op">=</span><span class="dv">65</span>, label<span class="op">=</span><span class="st">"2010"</span>, </span>
-<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>                   size<span class="op">=</span><span class="dv">80</span>, color<span class="op">=</span><span class="st">"grey"</span>, alpha<span class="op">=</span><span class="fl">0.2</span>, ha<span class="op">=</span><span class="st">'center'</span>)</span>
-<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> annotate(<span class="st">"text"</span>, x<span class="op">=</span><span class="dv">60000</span>, y<span class="op">=</span><span class="dv">45</span>, label<span class="op">=</span><span class="st">"*Bubble size reflects population size"</span>, </span>
-<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>                   size<span class="op">=</span><span class="dv">8</span>, color<span class="op">=</span><span class="st">"black"</span>, alpha<span class="op">=</span><span class="fl">0.8</span>, ha<span class="op">=</span><span class="st">'right'</span>)</span>
-<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> scale_fill_manual(values<span class="op">=</span>region_colors)  </span>
-<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> scale_color_manual(values<span class="op">=</span>region_colors)  </span>
-<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> theme(legend_position<span class="op">=</span><span class="st">'right'</span>))</span>
-<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> plotnine <span class="im">import</span> ggplot, aes, geom_point, geom_line, geom_jitter, scale_size_continuous, scale_x_log10, scale_fill_manual, scale_color_manual, labs, theme_minimal, annotate, guides, theme</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>region_colors <span class="op">=</span> {</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Africa'</span>: <span class="st">'#377eb8'</span>,    </span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Asia'</span>: <span class="st">'#e41a1c'</span>,     </span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Europe'</span>: <span class="st">'#ffeb00'</span>,   </span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Americas'</span>: <span class="st">'#4daf4a'</span>   </span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>q1data[<span class="st">'four_regions'</span>] <span class="op">=</span> q1data[<span class="st">'four_regions'</span>].<span class="bu">str</span>.capitalize()</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>plot <span class="op">=</span> (ggplot(q1data.dropna(), aes(x<span class="op">=</span><span class="st">'income'</span>, y<span class="op">=</span><span class="st">'life_exp'</span>, size<span class="op">=</span><span class="st">'population'</span>, fill<span class="op">=</span><span class="st">'four_regions'</span>, color<span class="op">=</span><span class="st">'four_regions'</span>))</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> geom_point(alpha<span class="op">=</span><span class="fl">0.8</span>)  <span class="co"># Main points (bubbles)</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> geom_line(aes(group<span class="op">=</span><span class="st">'four_regions'</span>), alpha<span class="op">=</span><span class="fl">0.5</span>)  </span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> geom_jitter(width<span class="op">=</span><span class="fl">0.1</span>, height<span class="op">=</span><span class="fl">0.1</span>, alpha<span class="op">=</span><span class="fl">0.4</span>)  </span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> scale_size_continuous(<span class="bu">range</span><span class="op">=</span>[<span class="dv">1</span>, <span class="dv">15</span>])  </span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> theme_minimal()</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> labs(x<span class="op">=</span><span class="st">'Income'</span>, y<span class="op">=</span><span class="st">'Life Expectancy'</span>, </span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>               fill<span class="op">=</span><span class="st">'Region'</span>, color<span class="op">=</span><span class="st">'Region'</span>,</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>               title<span class="op">=</span><span class="st">"Global Life Expectancy vs Income: A Population Perspective"</span>)</span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> guides(size<span class="op">=</span><span class="va">False</span>)  <span class="co"># Remove the population (size) legend</span></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> scale_x_log10(breaks<span class="op">=</span>[<span class="dv">500</span>, <span class="dv">1000</span>, <span class="dv">2000</span>, <span class="dv">4000</span>, <span class="dv">8000</span>, <span class="dv">16000</span>, <span class="dv">32000</span>, <span class="dv">64000</span>])</span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> annotate(<span class="st">"text"</span>, x<span class="op">=</span><span class="dv">10000</span>, y<span class="op">=</span><span class="dv">65</span>, label<span class="op">=</span><span class="st">"2010"</span>, </span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>                   size<span class="op">=</span><span class="dv">80</span>, color<span class="op">=</span><span class="st">"grey"</span>, alpha<span class="op">=</span><span class="fl">0.2</span>, ha<span class="op">=</span><span class="st">'center'</span>)</span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> annotate(<span class="st">"text"</span>, x<span class="op">=</span><span class="dv">60000</span>, y<span class="op">=</span><span class="dv">45</span>, label<span class="op">=</span><span class="st">"*Bubble size reflects population size"</span>, </span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>                   size<span class="op">=</span><span class="dv">8</span>, color<span class="op">=</span><span class="st">"black"</span>, alpha<span class="op">=</span><span class="fl">0.8</span>, ha<span class="op">=</span><span class="st">'right'</span>)</span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> scale_fill_manual(values<span class="op">=</span>region_colors)  </span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> scale_color_manual(values<span class="op">=</span>region_colors)  </span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> theme(legend_position<span class="op">=</span><span class="st">'right'</span>))</span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>/opt/anaconda3/lib/python3.12/pprint.py:632: FutureWarning: Using repr(plot) to draw and show the plot figure is deprecated and will be removed in a future version. Use plot.show().</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Lab01_files/figure-html/cell-5-output-2.png" class="img-fluid figure-img"></p>
+<p><img src="Lab01_files/figure-html/cell-6-output-2.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
@@ -343,17 +356,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Import the q2data.csv dataset. Tidy data before importing dataset because k is a non-numerical indicator and converting it to a numerical indicator.</li>
 </ol>
 <div id="d5e96a29" class="cell" data-execution_count="44">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>q2data <span class="op">=</span> pd.read_csv(<span class="st">'Data/q2data.csv'</span>)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>q2data <span class="op">=</span> q2data.dropna()</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> convert_k_to_numeric(value):</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">isinstance</span>(value, <span class="bu">str</span>) <span class="kw">and</span> <span class="st">'k'</span> <span class="kw">in</span> value:</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="bu">float</span>(value.replace(<span class="st">'k'</span>, <span class="st">''</span>)) <span class="op">*</span> <span class="dv">1000</span></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> value </span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>q2data[<span class="st">'energy'</span>] <span class="op">=</span> q2data[<span class="st">'energy'</span>].<span class="bu">apply</span>(convert_k_to_numeric).astype(<span class="bu">int</span>)</span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>q2data.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>q2data <span class="op">=</span> pd.read_csv(<span class="st">'Data/q2data.csv'</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>q2data <span class="op">=</span> q2data.dropna()</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> convert_k_to_numeric(value):</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">isinstance</span>(value, <span class="bu">str</span>) <span class="kw">and</span> <span class="st">'k'</span> <span class="kw">in</span> value:</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="bu">float</span>(value.replace(<span class="st">'k'</span>, <span class="st">''</span>)) <span class="op">*</span> <span class="dv">1000</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> value </span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>q2data[<span class="st">'energy'</span>] <span class="op">=</span> q2data[<span class="st">'energy'</span>].<span class="bu">apply</span>(convert_k_to_numeric).astype(<span class="bu">int</span>)</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>q2data.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 
@@ -445,7 +458,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Lab01_files/figure-html/cell-6-output-3.png" class="img-fluid figure-img"></p>
+<p><img src="Lab01_files/figure-html/cell-7-output-3.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
@@ -456,41 +469,41 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Sources: https://plotnine.org/reference/guide.html</p>
 <p>https://ggplot2.tidyverse.org/reference/ggtheme.html</p>
 <div id="3420da26" class="cell" data-execution_count="51">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> plotnine <span class="im">import</span> ggplot, aes, geom_point, scale_size_continuous, scale_x_continuous, scale_y_continuous, scale_fill_manual, labs, theme_minimal, annotate, guides, theme</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>region_colors <span class="op">=</span> {</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Africa'</span>: <span class="st">'#377eb8'</span>,    </span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Asia'</span>: <span class="st">'#e41a1c'</span>,      </span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Europe'</span>: <span class="st">'#ffeb00'</span>,    </span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Americas'</span>: <span class="st">'#4daf4a'</span>   </span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>q2data[<span class="st">'four_regions'</span>] <span class="op">=</span> q2data[<span class="st">'four_regions'</span>].<span class="bu">str</span>.capitalize()</span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>plot <span class="op">=</span> (ggplot(q2data.dropna(), aes(x<span class="op">=</span><span class="st">'exports'</span>, y<span class="op">=</span><span class="st">'imports'</span>, size<span class="op">=</span><span class="st">'energy'</span>, fill<span class="op">=</span><span class="st">'four_regions'</span>))</span>
-<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> geom_point(alpha<span class="op">=</span><span class="fl">0.8</span>)</span>
-<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> scale_size_continuous(<span class="bu">range</span><span class="op">=</span>[<span class="dv">1</span>, <span class="dv">15</span>])  </span>
-<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> theme_minimal()</span>
-<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> labs(x<span class="op">=</span><span class="st">'Exports (</span><span class="sc">% o</span><span class="st">f GDP)'</span>, y<span class="op">=</span><span class="st">'Imports (</span><span class="sc">% o</span><span class="st">f GDP)'</span>, </span>
-<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>               fill<span class="op">=</span><span class="st">'Region'</span>,</span>
-<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>               title<span class="op">=</span><span class="st">"Exports vs. Imports: An Energy Use Perspective"</span>)</span>
-<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> guides(size<span class="op">=</span><span class="va">False</span>)  </span>
-<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> scale_y_continuous(limits<span class="op">=</span>[<span class="dv">0</span>, <span class="dv">400</span>]) </span>
-<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> scale_x_continuous(limits<span class="op">=</span>[<span class="dv">0</span>, <span class="dv">230</span>])  </span>
-<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> annotate(<span class="st">"text"</span>, x<span class="op">=</span><span class="dv">110</span>, y<span class="op">=</span><span class="dv">200</span>, label<span class="op">=</span><span class="st">"1997"</span>,  </span>
-<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>                   size<span class="op">=</span><span class="dv">80</span>, color<span class="op">=</span><span class="st">"grey"</span>, alpha<span class="op">=</span><span class="fl">0.2</span>, ha<span class="op">=</span><span class="st">'center'</span>)</span>
-<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> annotate(<span class="st">"text"</span>, x<span class="op">=</span><span class="dv">190</span>, y<span class="op">=</span><span class="dv">30</span>, label<span class="op">=</span><span class="st">"*Bubble size reflects Energy Use"</span>, </span>
-<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a>                   size<span class="op">=</span><span class="dv">8</span>, color<span class="op">=</span><span class="st">"black"</span>, alpha<span class="op">=</span><span class="fl">0.8</span>, ha<span class="op">=</span><span class="st">'right'</span>)</span>
-<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> scale_fill_manual(values<span class="op">=</span>region_colors)  </span>
-<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> theme(legend_position<span class="op">=</span><span class="st">'right'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> plotnine <span class="im">import</span> ggplot, aes, geom_point, scale_size_continuous, scale_x_continuous, scale_y_continuous, scale_fill_manual, labs, theme_minimal, annotate, guides, theme</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>region_colors <span class="op">=</span> {</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Africa'</span>: <span class="st">'#377eb8'</span>,    </span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Asia'</span>: <span class="st">'#e41a1c'</span>,      </span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Europe'</span>: <span class="st">'#ffeb00'</span>,    </span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Americas'</span>: <span class="st">'#4daf4a'</span>   </span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>q2data[<span class="st">'four_regions'</span>] <span class="op">=</span> q2data[<span class="st">'four_regions'</span>].<span class="bu">str</span>.capitalize()</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>plot <span class="op">=</span> (ggplot(q2data.dropna(), aes(x<span class="op">=</span><span class="st">'exports'</span>, y<span class="op">=</span><span class="st">'imports'</span>, size<span class="op">=</span><span class="st">'energy'</span>, fill<span class="op">=</span><span class="st">'four_regions'</span>))</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> geom_point(alpha<span class="op">=</span><span class="fl">0.8</span>)</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> scale_size_continuous(<span class="bu">range</span><span class="op">=</span>[<span class="dv">1</span>, <span class="dv">15</span>])  </span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> theme_minimal()</span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> labs(x<span class="op">=</span><span class="st">'Exports (</span><span class="sc">% o</span><span class="st">f GDP)'</span>, y<span class="op">=</span><span class="st">'Imports (</span><span class="sc">% o</span><span class="st">f GDP)'</span>, </span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>               fill<span class="op">=</span><span class="st">'Region'</span>,</span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>               title<span class="op">=</span><span class="st">"Exports vs. Imports: An Energy Use Perspective"</span>)</span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> guides(size<span class="op">=</span><span class="va">False</span>)  </span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> scale_y_continuous(limits<span class="op">=</span>[<span class="dv">0</span>, <span class="dv">400</span>]) </span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> scale_x_continuous(limits<span class="op">=</span>[<span class="dv">0</span>, <span class="dv">230</span>])  </span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> annotate(<span class="st">"text"</span>, x<span class="op">=</span><span class="dv">110</span>, y<span class="op">=</span><span class="dv">200</span>, label<span class="op">=</span><span class="st">"1997"</span>,  </span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>                   size<span class="op">=</span><span class="dv">80</span>, color<span class="op">=</span><span class="st">"grey"</span>, alpha<span class="op">=</span><span class="fl">0.2</span>, ha<span class="op">=</span><span class="st">'center'</span>)</span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> annotate(<span class="st">"text"</span>, x<span class="op">=</span><span class="dv">190</span>, y<span class="op">=</span><span class="dv">30</span>, label<span class="op">=</span><span class="st">"*Bubble size reflects Energy Use"</span>, </span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>                   size<span class="op">=</span><span class="dv">8</span>, color<span class="op">=</span><span class="st">"black"</span>, alpha<span class="op">=</span><span class="fl">0.8</span>, ha<span class="op">=</span><span class="st">'right'</span>)</span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> scale_fill_manual(values<span class="op">=</span>region_colors)  </span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> theme(legend_position<span class="op">=</span><span class="st">'right'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>/opt/anaconda3/lib/python3.12/pprint.py:632: FutureWarning: Using repr(plot) to draw and show the plot figure is deprecated and will be removed in a future version. Use plot.show().</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Lab01_files/figure-html/cell-7-output-2.png" class="img-fluid figure-img"></p>
+<p><img src="Lab01_files/figure-html/cell-8-output-2.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
@@ -500,31 +513,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ol>
 <p>Using <code>geom_density_2d</code> in this plot provides valuable insights into the distribution and density of the data points. The contour lines created by <code>geom_density_2d</code> effectively highlight areas where data points are most densely concentrated, helping to visualize clusters that may be difficult to identify with just <code>geom_point</code>. This is particularly useful for reducing overplotting, as many overlapping points can obscure the underlying data patterns. By showing density through contour lines, <code>geom_density_2d</code> makes it easier to interpret areas with higher occurrences without cluttering the graph. Additionally, the contour lines help in identifying general trends by grouping similar data points, offering a clearer understanding of how exports and imports vary across regions in relation to energy use. Overall, <code>geom_density_2d</code> is a valuable tool for visualizing patterns, reducing overplotting, and enhancing the interpretability of scatterplots.</p>
 <div id="204d8780" class="cell" data-execution_count="60">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> plotnine <span class="im">import</span> ggplot, aes, geom_point, geom_density_2d, labs, theme_minimal, scale_x_continuous, scale_y_continuous</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>plot <span class="op">=</span> (</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    ggplot(q2data, aes(x<span class="op">=</span><span class="st">'exports'</span>, y<span class="op">=</span><span class="st">'imports'</span>, color<span class="op">=</span><span class="st">'four_regions'</span>)) <span class="op">+</span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    geom_point(alpha<span class="op">=</span><span class="fl">0.7</span>) <span class="op">+</span></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    geom_density_2d() <span class="op">+</span>  </span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>    labs(</span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>        x<span class="op">=</span><span class="st">'Exports (</span><span class="sc">% o</span><span class="st">f GDP)'</span>,</span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>        y<span class="op">=</span><span class="st">'Imports (</span><span class="sc">% o</span><span class="st">f GDP)'</span>,</span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>        color<span class="op">=</span><span class="st">'World Region'</span>,</span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>        title<span class="op">=</span><span class="st">'Exports vs. Imports: An Energy Use Perspective'</span></span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>    ) <span class="op">+</span></span>
-<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>    scale_x_continuous(limits<span class="op">=</span>[<span class="dv">0</span>, <span class="dv">230</span>]) <span class="op">+</span>  </span>
-<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>    scale_y_continuous(limits<span class="op">=</span>[<span class="dv">0</span>, <span class="dv">400</span>]) <span class="op">+</span>  </span>
-<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>    theme_minimal()</span>
-<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> plotnine <span class="im">import</span> ggplot, aes, geom_point, geom_density_2d, labs, theme_minimal, scale_x_continuous, scale_y_continuous</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>plot <span class="op">=</span> (</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    ggplot(q2data, aes(x<span class="op">=</span><span class="st">'exports'</span>, y<span class="op">=</span><span class="st">'imports'</span>, color<span class="op">=</span><span class="st">'four_regions'</span>)) <span class="op">+</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    geom_point(alpha<span class="op">=</span><span class="fl">0.7</span>) <span class="op">+</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    geom_density_2d() <span class="op">+</span>  </span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    labs(</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>        x<span class="op">=</span><span class="st">'Exports (</span><span class="sc">% o</span><span class="st">f GDP)'</span>,</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>        y<span class="op">=</span><span class="st">'Imports (</span><span class="sc">% o</span><span class="st">f GDP)'</span>,</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>        color<span class="op">=</span><span class="st">'World Region'</span>,</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>        title<span class="op">=</span><span class="st">'Exports vs. Imports: An Energy Use Perspective'</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>    ) <span class="op">+</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>    scale_x_continuous(limits<span class="op">=</span>[<span class="dv">0</span>, <span class="dv">230</span>]) <span class="op">+</span>  </span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>    scale_y_continuous(limits<span class="op">=</span>[<span class="dv">0</span>, <span class="dv">400</span>]) <span class="op">+</span>  </span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>    theme_minimal()</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>/opt/anaconda3/lib/python3.12/pprint.py:632: FutureWarning: Using repr(plot) to draw and show the plot figure is deprecated and will be removed in a future version. Use plot.show().</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Lab01_files/figure-html/cell-8-output-2.png" class="img-fluid figure-img"></p>
+<p><img src="Lab01_files/figure-html/cell-9-output-2.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
@@ -547,8 +560,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Import the q3data.csv dataset.</li>
 </ol>
 <div id="1b974322" class="cell" data-execution_count="32">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>q3data <span class="op">=</span> pd.read_csv(<span class="st">'Data/q3data.csv'</span>)</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>q3data.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>q3data <span class="op">=</span> pd.read_csv(<span class="st">'Data/q3data.csv'</span>)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>q3data.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 
@@ -640,7 +653,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Lab01_files/figure-html/cell-9-output-3.png" class="img-fluid figure-img"></p>
+<p><img src="Lab01_files/figure-html/cell-10-output-3.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
@@ -650,31 +663,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ol>
 <p>Sources:</p>
 <div id="a1d68397" class="cell" data-execution_count="77">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> plotnine <span class="im">import</span> ggplot, aes, geom_point, theme_linedraw, scale_y_log10, scale_size_continuous, scale_x_continuous, scale_fill_manual, labs, annotate, guides, theme</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>region_colors <span class="op">=</span> {</span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Africa'</span>: <span class="st">'#377eb8'</span>,    </span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Asia'</span>: <span class="st">'#e41a1c'</span>,      </span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Europe'</span>: <span class="st">'#ffeb00'</span>,    </span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Americas'</span>: <span class="st">'#4daf4a'</span> </span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>q3data_filtered <span class="op">=</span> q3data.dropna(subset<span class="op">=</span>[<span class="st">'four_regions'</span>])</span>
-<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>plot <span class="op">=</span> (ggplot(q3data_filtered, aes(x<span class="op">=</span><span class="st">'internet_users'</span>, y<span class="op">=</span><span class="st">'gdp'</span>, size<span class="op">=</span><span class="st">'income'</span>, fill<span class="op">=</span><span class="st">'four_regions'</span>))</span>
-<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> geom_point(alpha<span class="op">=</span><span class="fl">0.5</span>)</span>
-<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> scale_size_continuous(<span class="bu">range</span><span class="op">=</span>[<span class="dv">1</span>, <span class="dv">20</span>])  </span>
-<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> theme_linedraw() </span>
-<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> labs(x<span class="op">=</span><span class="st">'Internet Users (</span><span class="sc">% o</span><span class="st">f population)'</span>, y<span class="op">=</span><span class="st">'GDP/capita'</span>, </span>
-<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>           fill<span class="op">=</span><span class="st">'Region'</span>, title<span class="op">=</span><span class="st">"Internet Users vs GDP/capita: An Income Perspective"</span>)</span>
-<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> scale_y_log10(breaks<span class="op">=</span>[<span class="dv">200</span>, <span class="dv">500</span>, <span class="dv">1000</span>, <span class="dv">2000</span>, <span class="dv">5000</span>, <span class="dv">10000</span>, <span class="dv">20000</span>, <span class="dv">50000</span>, <span class="dv">100000</span>])  </span>
-<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> scale_x_continuous(breaks<span class="op">=</span>[<span class="dv">10</span>,<span class="dv">20</span>,<span class="dv">30</span>,<span class="dv">40</span>,<span class="dv">50</span>,<span class="dv">60</span>,<span class="dv">70</span>,<span class="dv">80</span>,<span class="dv">90</span>])  </span>
-<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> annotate(<span class="st">"text"</span>, x<span class="op">=</span><span class="dv">50</span>, y<span class="op">=</span><span class="dv">5000</span>, label<span class="op">=</span><span class="st">"2001"</span>, size<span class="op">=</span><span class="dv">100</span>, color<span class="op">=</span><span class="st">"grey"</span>, alpha<span class="op">=</span><span class="fl">0.2</span>, ha<span class="op">=</span><span class="st">'center'</span>)  </span>
-<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> annotate(<span class="st">"text"</span>, x<span class="op">=</span><span class="dv">100</span>, y<span class="op">=</span><span class="dv">250</span>, label<span class="op">=</span><span class="st">"*Bubble size reflects Income"</span>, size<span class="op">=</span><span class="dv">8</span>, color<span class="op">=</span><span class="st">"black"</span>, alpha<span class="op">=</span><span class="fl">0.8</span>, ha<span class="op">=</span><span class="st">'right'</span>)  </span>
-<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> scale_fill_manual(values<span class="op">=</span>region_colors)  </span>
-<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> guides(size<span class="op">=</span><span class="va">False</span>)  </span>
-<span id="cb19-25"><a href="#cb19-25" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> theme(legend_position<span class="op">=</span><span class="st">'right'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> plotnine <span class="im">import</span> ggplot, aes, geom_point, theme_linedraw, scale_y_log10, scale_size_continuous, scale_x_continuous, scale_fill_manual, labs, annotate, guides, theme</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>region_colors <span class="op">=</span> {</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Africa'</span>: <span class="st">'#377eb8'</span>,    </span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Asia'</span>: <span class="st">'#e41a1c'</span>,      </span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Europe'</span>: <span class="st">'#ffeb00'</span>,    </span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Americas'</span>: <span class="st">'#4daf4a'</span> </span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>q3data_filtered <span class="op">=</span> q3data.dropna(subset<span class="op">=</span>[<span class="st">'four_regions'</span>])</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>plot <span class="op">=</span> (ggplot(q3data_filtered, aes(x<span class="op">=</span><span class="st">'internet_users'</span>, y<span class="op">=</span><span class="st">'gdp'</span>, size<span class="op">=</span><span class="st">'income'</span>, fill<span class="op">=</span><span class="st">'four_regions'</span>))</span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> geom_point(alpha<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> scale_size_continuous(<span class="bu">range</span><span class="op">=</span>[<span class="dv">1</span>, <span class="dv">20</span>])  </span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> theme_linedraw() </span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> labs(x<span class="op">=</span><span class="st">'Internet Users (</span><span class="sc">% o</span><span class="st">f population)'</span>, y<span class="op">=</span><span class="st">'GDP/capita'</span>, </span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>           fill<span class="op">=</span><span class="st">'Region'</span>, title<span class="op">=</span><span class="st">"Internet Users vs GDP/capita: An Income Perspective"</span>)</span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> scale_y_log10(breaks<span class="op">=</span>[<span class="dv">200</span>, <span class="dv">500</span>, <span class="dv">1000</span>, <span class="dv">2000</span>, <span class="dv">5000</span>, <span class="dv">10000</span>, <span class="dv">20000</span>, <span class="dv">50000</span>, <span class="dv">100000</span>])  </span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> scale_x_continuous(breaks<span class="op">=</span>[<span class="dv">10</span>,<span class="dv">20</span>,<span class="dv">30</span>,<span class="dv">40</span>,<span class="dv">50</span>,<span class="dv">60</span>,<span class="dv">70</span>,<span class="dv">80</span>,<span class="dv">90</span>])  </span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> annotate(<span class="st">"text"</span>, x<span class="op">=</span><span class="dv">50</span>, y<span class="op">=</span><span class="dv">5000</span>, label<span class="op">=</span><span class="st">"2001"</span>, size<span class="op">=</span><span class="dv">100</span>, color<span class="op">=</span><span class="st">"grey"</span>, alpha<span class="op">=</span><span class="fl">0.2</span>, ha<span class="op">=</span><span class="st">'center'</span>)  </span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> annotate(<span class="st">"text"</span>, x<span class="op">=</span><span class="dv">100</span>, y<span class="op">=</span><span class="dv">250</span>, label<span class="op">=</span><span class="st">"*Bubble size reflects Income"</span>, size<span class="op">=</span><span class="dv">8</span>, color<span class="op">=</span><span class="st">"black"</span>, alpha<span class="op">=</span><span class="fl">0.8</span>, ha<span class="op">=</span><span class="st">'right'</span>)  </span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> scale_fill_manual(values<span class="op">=</span>region_colors)  </span>
+<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> guides(size<span class="op">=</span><span class="va">False</span>)  </span>
+<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> theme(legend_position<span class="op">=</span><span class="st">'right'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>/opt/anaconda3/lib/python3.12/pprint.py:632: FutureWarning: Using repr(plot) to draw and show the plot figure is deprecated and will be removed in a future version. Use plot.show().
 /opt/anaconda3/lib/python3.12/site-packages/plotnine/layer.py:364: PlotnineWarning: geom_point : Removed 12 rows containing missing values.</code></pre>
@@ -682,7 +695,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Lab01_files/figure-html/cell-10-output-2.png" class="img-fluid figure-img"></p>
+<p><img src="Lab01_files/figure-html/cell-11-output-2.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
@@ -696,30 +709,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Sources: https://ggplot2.tidyverse.org/reference/geom_smooth.html</p>
 <p>https://stackoverflow.com/questions/16562859/ggplot2-colour-geom-point-by-factor-but-geom-smooth-based-on-all-data</p>
 <div id="d747d7ef" class="cell" data-execution_count="83">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> plotnine <span class="im">import</span> ggplot, aes, geom_smooth, scale_x_continuous, scale_y_log10, labs, theme_minimal, annotate, theme, element_text</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the plot using geom_smooth with linear regression method</span></span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>plot <span class="op">=</span> (ggplot(q3data_filtered, aes(x<span class="op">=</span><span class="st">'internet_users'</span>, y<span class="op">=</span><span class="st">'gdp'</span>, color<span class="op">=</span><span class="st">'four_regions'</span>))</span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> geom_smooth(method<span class="op">=</span><span class="st">'lm'</span>)  <span class="co"># Using linear regression for the trend line</span></span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> scale_x_continuous(breaks<span class="op">=</span>[<span class="dv">10</span>,<span class="dv">20</span>,<span class="dv">30</span>,<span class="dv">40</span>,<span class="dv">50</span>,<span class="dv">60</span>,<span class="dv">70</span>,<span class="dv">80</span>,<span class="dv">90</span>], name<span class="op">=</span><span class="st">"Individuals using the Internet (</span><span class="sc">% o</span><span class="st">f population)"</span>)</span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> scale_y_log10(breaks<span class="op">=</span>[<span class="dv">200</span>, <span class="dv">500</span>, <span class="dv">1000</span>, <span class="dv">2000</span>, <span class="dv">5000</span>, <span class="dv">10000</span>, <span class="dv">20000</span>, <span class="dv">50000</span>, <span class="dv">100000</span>], name<span class="op">=</span><span class="st">"GDP per capita (US$, inflation-adjusted)"</span>)</span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> labs(title<span class="op">=</span><span class="st">"Internet Users vs GDP per capita (2001) with Linear Trend"</span>, color<span class="op">=</span><span class="st">"World Regions"</span>)</span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> annotate(<span class="st">"text"</span>, x<span class="op">=</span><span class="dv">50</span>, y<span class="op">=</span><span class="dv">5000</span>, label<span class="op">=</span><span class="st">"2001"</span>, size<span class="op">=</span><span class="dv">100</span>, color<span class="op">=</span><span class="st">"grey"</span>, alpha<span class="op">=</span><span class="fl">0.2</span>, ha<span class="op">=</span><span class="st">'center'</span>)  <span class="co"># Year annotation in the middle</span></span>
-<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> theme_minimal()</span>
-<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> theme(</span>
-<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>            legend_position<span class="op">=</span><span class="st">'right'</span>,</span>
-<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>            plot_title<span class="op">=</span>element_text(ha<span class="op">=</span><span class="st">'center'</span>, va<span class="op">=</span><span class="st">'top'</span>, size<span class="op">=</span><span class="dv">16</span>)  <span class="co"># Center the title</span></span>
-<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>       )</span>
-<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> plotnine <span class="im">import</span> ggplot, aes, geom_smooth, scale_x_continuous, scale_y_log10, labs, theme_minimal, annotate, theme, element_text</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the plot using geom_smooth with linear regression method</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>plot <span class="op">=</span> (ggplot(q3data_filtered, aes(x<span class="op">=</span><span class="st">'internet_users'</span>, y<span class="op">=</span><span class="st">'gdp'</span>, color<span class="op">=</span><span class="st">'four_regions'</span>))</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> geom_smooth(method<span class="op">=</span><span class="st">'lm'</span>)  <span class="co"># Using linear regression for the trend line</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> scale_x_continuous(breaks<span class="op">=</span>[<span class="dv">10</span>,<span class="dv">20</span>,<span class="dv">30</span>,<span class="dv">40</span>,<span class="dv">50</span>,<span class="dv">60</span>,<span class="dv">70</span>,<span class="dv">80</span>,<span class="dv">90</span>], name<span class="op">=</span><span class="st">"Individuals using the Internet (</span><span class="sc">% o</span><span class="st">f population)"</span>)</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> scale_y_log10(breaks<span class="op">=</span>[<span class="dv">200</span>, <span class="dv">500</span>, <span class="dv">1000</span>, <span class="dv">2000</span>, <span class="dv">5000</span>, <span class="dv">10000</span>, <span class="dv">20000</span>, <span class="dv">50000</span>, <span class="dv">100000</span>], name<span class="op">=</span><span class="st">"GDP per capita (US$, inflation-adjusted)"</span>)</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> labs(title<span class="op">=</span><span class="st">"Internet Users vs GDP per capita (2001) with Linear Trend"</span>, color<span class="op">=</span><span class="st">"World Regions"</span>)</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> annotate(<span class="st">"text"</span>, x<span class="op">=</span><span class="dv">50</span>, y<span class="op">=</span><span class="dv">5000</span>, label<span class="op">=</span><span class="st">"2001"</span>, size<span class="op">=</span><span class="dv">100</span>, color<span class="op">=</span><span class="st">"grey"</span>, alpha<span class="op">=</span><span class="fl">0.2</span>, ha<span class="op">=</span><span class="st">'center'</span>)  <span class="co"># Year annotation in the middle</span></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> theme_minimal()</span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> theme(</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>            legend_position<span class="op">=</span><span class="st">'right'</span>,</span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>            plot_title<span class="op">=</span>element_text(ha<span class="op">=</span><span class="st">'center'</span>, va<span class="op">=</span><span class="st">'top'</span>, size<span class="op">=</span><span class="dv">16</span>)  <span class="co"># Center the title</span></span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>       )</span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>/opt/anaconda3/lib/python3.12/pprint.py:632: FutureWarning: Using repr(plot) to draw and show the plot figure is deprecated and will be removed in a future version. Use plot.show().</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Lab01_files/figure-html/cell-11-output-2.png" class="img-fluid figure-img"></p>
+<p><img src="Lab01_files/figure-html/cell-12-output-2.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
