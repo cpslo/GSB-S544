@@ -1,0 +1,2700 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.555">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>GSB 544: Data Science and Machine Learning with Python - 5&nbsp; Pivoting and Joining</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./05-function_writing.html" rel="next">
+<link href="./03-basic_data_operations.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./00-setup.html">Data Science with Python</a></li><li class="breadcrumb-item"><a href="./04-pivoting_joining.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Pivoting and Joining</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">GSB 544: Data Science and Machine Learning with Python</a> 
+        <div class="sidebar-tools-main tools-wide">
+    <a href="https://github.com/DS-ML-with-python/Course-Textbook/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <div class="dropdown">
+      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Share"><i class="bi bi-share"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
+              <i class="bi bi-bi-twitter pe-1"></i>
+            Twitter
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
+              <i class="bi bi-bi-facebook pe-1"></i>
+            Facebook
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=|url|">
+              <i class="bi bi-bi-linkedin pe-1"></i>
+            LinkedIn
+            </a>
+          </li>
+      </ul>
+    </div>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Data Science with Python</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./00-setup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Intro and Setup</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Programming Basics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-plotnine.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data Visualization in Python</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-basic_data_operations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Tabular Data and Basic Data Operations</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-pivoting_joining.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Pivoting and Joining</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-function_writing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Writing Custom Functions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-iteration.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Iteration</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-webscraping.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Webscraping</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-regex.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Strings and Regular Expressions</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Machine Learning with Python</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-modeling_intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Introduction to Predictive Modeling</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-multiple_linear_regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-model_validation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Model Validation</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-cross_validation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Pipelines, Cross-Validation, and Tuning</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13-penalized_regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Penalized Regression</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./14-nonparametric_methods.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Nonparametric Methods</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./15-classification_intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Introduction to Classification</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./16-linear_classifiers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Linear Classifiers</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./17-multiclass.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Multiclass Classification</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">5.1</span> Introduction</a></li>
+  <li><a href="#pivoting-data-in-python" id="toc-pivoting-data-in-python" class="nav-link" data-scroll-target="#pivoting-data-in-python"><span class="header-section-number">5.2</span> Pivoting Data in Python</a>
+  <ul class="collapse">
+  <li><a href="#tidy-data-is-special-tabular-data" id="toc-tidy-data-is-special-tabular-data" class="nav-link" data-scroll-target="#tidy-data-is-special-tabular-data"><span class="header-section-number">5.2.1</span> Tidy Data is Special Tabular Data</a></li>
+  <li><a href="#wide-to-long-format" id="toc-wide-to-long-format" class="nav-link" data-scroll-target="#wide-to-long-format"><span class="header-section-number">5.2.2</span> Wide to Long Format</a></li>
+  <li><a href="#long-to-wide-format" id="toc-long-to-wide-format" class="nav-link" data-scroll-target="#long-to-wide-format"><span class="header-section-number">5.2.3</span> Long to Wide Format</a></li>
+  </ul></li>
+  <li><a href="#joining-datasets-in-python" id="toc-joining-datasets-in-python" class="nav-link" data-scroll-target="#joining-datasets-in-python"><span class="header-section-number">5.3</span> Joining Datasets in Python</a>
+  <ul class="collapse">
+  <li><a href="#concatenating-and-merging-data" id="toc-concatenating-and-merging-data" class="nav-link" data-scroll-target="#concatenating-and-merging-data"><span class="header-section-number">5.3.1</span> Concatenating and Merging Data</a></li>
+  <li><a href="#types-of-joins" id="toc-types-of-joins" class="nav-link" data-scroll-target="#types-of-joins"><span class="header-section-number">5.3.2</span> Types of Joins</a></li>
+  </ul></li>
+  <li><a href="#data-wrangling-and-ai" id="toc-data-wrangling-and-ai" class="nav-link" data-scroll-target="#data-wrangling-and-ai"><span class="header-section-number">5.4</span> Data Wrangling and AI</a>
+  <ul class="collapse">
+  <li><a href="#cautionary-tales-and-advice" id="toc-cautionary-tales-and-advice" class="nav-link" data-scroll-target="#cautionary-tales-and-advice"><span class="header-section-number">5.4.1</span> Cautionary tales and advice</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/DS-ML-with-python/Course-Textbook/edit/main/04-pivoting_joining.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./00-setup.html">Data Science with Python</a></li><li class="breadcrumb-item"><a href="./04-pivoting_joining.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Pivoting and Joining</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Pivoting and Joining</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introduction" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">5.1</span> Introduction</h2>
+<p>This document demonstrates the use of the <code>pandas</code> library in Python to do pivoting and joining of datasets.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If you do not have the <code>pandas</code> library installed then you will need to run</p>
+<p><code>pip install pandas</code></p>
+<p>in the Jupyter terminal to install. <strong>Remember:</strong> you only need to install once per machine (or Colab session).</p>
+</div>
+</div>
+<div id="418ad175" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="5c1a94de" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Population data from GapMinder</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>population <span class="op">=</span> pd.read_csv(<span class="st">"/content/pop.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="pivoting-data-in-python" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="pivoting-data-in-python"><span class="header-section-number">5.2</span> Pivoting Data in Python</h2>
+<p>Data come in all shapes and forms! Rare is the day when we can open a dataset for the first time and it’s ready for every type of visualization or analysis that we could want to do with it.</p>
+<p>In addition to the wrangling we discussed in the previous chapter, there may be a need to reshape the dataset entirely. For example, the column names might be values themselves that we want to make use of.</p>
+<p>Recall our introduction of <em>tidy</em> data in the previous chapter…</p>
+<section id="tidy-data-is-special-tabular-data" class="level3" data-number="5.2.1">
+<h3 data-number="5.2.1" class="anchored" data-anchor-id="tidy-data-is-special-tabular-data"><span class="header-section-number">5.2.1</span> Tidy Data is Special Tabular Data</h3>
+<p>For most people, the image that comes to mind when thinking about data is indeed something tabular or spreadsheet-like in nature. <strong>Which is great!</strong></p>
+<p>Tabular data is a form preferred by MANY different data operations and work. However, we will want to take this one step further. In almost all data science work we want our data to be <strong>tidy</strong></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A dataset is <strong>tidy</strong> if it adheres to following three characteristics:</p>
+<ul>
+<li><p>Every column is a variable</p></li>
+<li><p>Every row is an observation</p></li>
+<li><p>Every cell is a single value</p></li>
+</ul>
+</div>
+</div>
+<p><img src="https://d33wubrfki0l68.cloudfront.net/6f1ddb544fc5c69a2478e444ab8112fb0eea23f8/91adc/images/tidy-1.png" class="img-fluid"></p>
+<p>In the previous chapter you were asked to open up a GapMinder dataset <a href="https://www.gapminder.org/data/">here</a> and to comment on whether this dataset was <em>tidy</em> or not. The answer was <strong>no</strong>, this dataset is not <em>tidy</em>. These datasets come with a row representing a country, each column representing a year, and each cell representing the value of the global indicator selected. To be <em>tidy</em> these three variables (<code>country</code>, <code>year</code>, <code>global indicator</code>) should each have their own column, instead of the <code>year</code> variable taking values as the column headers.</p>
+</section>
+<section id="wide-to-long-format" class="level3" data-number="5.2.2">
+<h3 data-number="5.2.2" class="anchored" data-anchor-id="wide-to-long-format"><span class="header-section-number">5.2.2</span> Wide to Long Format</h3>
+<p>The GapMinder dataset is an example of what’s commonly referred to as data in a <em>wide format</em>. To make this dataset <em>tidy</em> we aim for a dataset with columns for <code>country</code>, <code>year</code>, and <code>global indicator</code> (e.g.&nbsp;population). Three columns is many fewer than the current number of columns, and so we will convert this dataset from <em>wide to long format</em>.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>It often helps to physically draw/map out what our current dataset looks like and what the look of our target dataset is, before actually trying to write any code to do this. Writing the code can be <strong>extremely</strong> easier after this exercise, and only makes future pivot operations easier.</p>
+</div>
+</div>
+<p>In order to convert our dataset from <em>wide to long format</em> we will use <code>.melt()</code> (or <code>.wide_to_long()</code>) in <code>pandas</code>.</p>
+<div id="329de024" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>long_population <span class="op">=</span> population.melt(id_vars<span class="op">=</span>[<span class="st">"country"</span>], var_name<span class="op">=</span><span class="st">"year"</span>, value_name<span class="op">=</span><span class="st">"population"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-check-in no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Check In
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>With 2-3 people around you navigate to GapMinder, download the population dataset, and convert it from wide to long format. Does the result look how you expect? Is any other wrangling necessary?</p>
+</div>
+</div>
+</section>
+<section id="long-to-wide-format" class="level3" data-number="5.2.3">
+<h3 data-number="5.2.3" class="anchored" data-anchor-id="long-to-wide-format"><span class="header-section-number">5.2.3</span> Long to Wide Format</h3>
+<p>Even though certain data shapes are not considered <em>tidy</em>, they may be more conducive to performing certain operations than other shapes. For example, what if we were interested in the change in country population between 1950 and 2010? In the original <em>wide</em> shape of the GapMinder data this operation would have been a simple difference of columns like below.</p>
+<div id="2a71fcf7" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>population[<span class="st">"pop_diff"</span>] <span class="op">=</span> population[<span class="st">"2010"</span>] <span class="op">-</span> population[<span class="st">"1950"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-check-in no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Check In
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Why doesn’t the above code work without further wrangling? What in the dataset needs to change for this operation to work?</p>
+</div>
+</div>
+<p>In the <em>long</em> format of our Gapminder dataset (<code>long_population</code>), this operation is less straightforward. Sometimes datasets come to us in <em>long</em> format and to do things like the operation above we need to convert that dataset from <em>long to wide format</em>. We can go the reverse direction (i.e.&nbsp;<em>long to wide format</em>) with <code>.pivot()</code> in <code>pandas</code>.</p>
+<div id="00ab953a" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>wide_population <span class="op">=</span> long_population.pivot(index <span class="op">=</span> <span class="st">"country"</span>, columns <span class="op">=</span> <span class="st">"year"</span>, values <span class="op">=</span> <span class="st">"population"</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>wide_population <span class="op">=</span> wide_population.reset_index()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-learn-more no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Learn More
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>We haven’t spent much time discussing the <code>index</code> of a <code>pandas</code> DataFrame, but you can think of it like an address for data, or slices of data in a DataFrame. You can also think of an <code>index</code> (or <code>indices</code>) as row names, or axis labels, for your dataset. This can be useful for a number of functions in Python, and can enhance the look of results or visualizations.</p>
+<p>However, understanding them is not critical for what we will do in Python. Furthermore, variables that are <code>indices</code> for a DataFrame cannot be accessed or referenced in the same way as other variables in the DataFrame. So, we will avoid their use if possible.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="joining-datasets-in-python" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="joining-datasets-in-python"><span class="header-section-number">5.3</span> Joining Datasets in Python</h2>
+<p>The information you need is often spread across multiple data sets, so you will need to combine multiple data sets into one. In this chapter, we discuss strategies for combining information from multiple (tabular) data sets.</p>
+<p>As a working example, we will use a data set of baby names collected by the Social Security Administration. Each data set in this collection contains the names of all babies born in the United States in a particular year. This data is publicly available, and a copy has been made available at <a href="https://dlsun.github.io/pods/data/names/">https://dlsun.github.io/pods/data/names/</a>.</p>
+<section id="concatenating-and-merging-data" class="level3" data-number="5.3.1">
+<h3 data-number="5.3.1" class="anchored" data-anchor-id="concatenating-and-merging-data"><span class="header-section-number">5.3.1</span> Concatenating and Merging Data</h3>
+<section id="concatenation" class="level4" data-number="5.3.1.1">
+<h4 data-number="5.3.1.1" class="anchored" data-anchor-id="concatenation"><span class="header-section-number">5.3.1.1</span> Concatenation</h4>
+<p>Sometimes, the <em>rows</em> of data are spread across multiple files, and we want to combine the rows into a single data set. The process of combining rows from different data sets is known as concatenation.</p>
+<p>Visually, to concatenate two <code>DataFrames</code>, we simply stack them on top of one another.</p>
+<p>For example, suppose we want to understand how the popularity of different names evolved between 1995 and 2015. The 1995 names and the 2015 names are stored in two different files: <code>yob1995.txt</code> and <code>yob2015.txt</code>, respectively. To carry out this analysis, we will need to combine these two data sets into one.</p>
+<div id="37b2ee73" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>data_dir <span class="op">=</span> <span class="st">"http://dlsun.github.io/pods/data/names/"</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>names1995 <span class="op">=</span> pd.read_csv(data_dir <span class="op">+</span> <span class="st">"yob1995.txt"</span>,</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>                        header<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>                        names<span class="op">=</span>[<span class="st">"Name"</span>, <span class="st">"Sex"</span>, <span class="st">"Count"</span>])</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>names1995</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="2">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Name</th>
+<th data-quarto-table-cell-role="th">Sex</th>
+<th data-quarto-table-cell-role="th">Count</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>Jessica</td>
+<td>F</td>
+<td>27935</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>Ashley</td>
+<td>F</td>
+<td>26603</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>Emily</td>
+<td>F</td>
+<td>24378</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>Samantha</td>
+<td>F</td>
+<td>21646</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>Sarah</td>
+<td>F</td>
+<td>21369</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">26075</td>
+<td>Zerek</td>
+<td>M</td>
+<td>5</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">26076</td>
+<td>Zhen</td>
+<td>M</td>
+<td>5</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">26077</td>
+<td>Ziggy</td>
+<td>M</td>
+<td>5</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">26078</td>
+<td>Zuberi</td>
+<td>M</td>
+<td>5</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">26079</td>
+<td>Zyon</td>
+<td>M</td>
+<td>5</td>
+</tr>
+</tbody>
+</table>
+
+<p>26080 rows × 3 columns</p>
+</div>
+</div>
+</div>
+<div id="a5612a82" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>names2015 <span class="op">=</span> pd.read_csv(data_dir <span class="op">+</span> <span class="st">"yob2015.txt"</span>,</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>                        header<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>                        names<span class="op">=</span>[<span class="st">"Name"</span>, <span class="st">"Sex"</span>, <span class="st">"Count"</span>])</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>names2015</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="3">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Name</th>
+<th data-quarto-table-cell-role="th">Sex</th>
+<th data-quarto-table-cell-role="th">Count</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>Emma</td>
+<td>F</td>
+<td>20455</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>Olivia</td>
+<td>F</td>
+<td>19691</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>Sophia</td>
+<td>F</td>
+<td>17417</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>Ava</td>
+<td>F</td>
+<td>16378</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>Isabella</td>
+<td>F</td>
+<td>15617</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">33116</td>
+<td>Zykell</td>
+<td>M</td>
+<td>5</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">33117</td>
+<td>Zyking</td>
+<td>M</td>
+<td>5</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">33118</td>
+<td>Zykir</td>
+<td>M</td>
+<td>5</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">33119</td>
+<td>Zyrus</td>
+<td>M</td>
+<td>5</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">33120</td>
+<td>Zyus</td>
+<td>M</td>
+<td>5</td>
+</tr>
+</tbody>
+</table>
+
+<p>33121 rows × 3 columns</p>
+</div>
+</div>
+</div>
+<p>To concatenate the two, we use the <code>pd.concat()</code> function, which accepts a <em>list</em> of <code>pandas</code> objects (<code>DataFrames</code> or <code>Series</code>) and concatenates them.</p>
+<div id="bcfd0354" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>pd.concat([names1995, names2015])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="4">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Name</th>
+<th data-quarto-table-cell-role="th">Sex</th>
+<th data-quarto-table-cell-role="th">Count</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>Jessica</td>
+<td>F</td>
+<td>27935</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>Ashley</td>
+<td>F</td>
+<td>26603</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>Emily</td>
+<td>F</td>
+<td>24378</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>Samantha</td>
+<td>F</td>
+<td>21646</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>Sarah</td>
+<td>F</td>
+<td>21369</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">33116</td>
+<td>Zykell</td>
+<td>M</td>
+<td>5</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">33117</td>
+<td>Zyking</td>
+<td>M</td>
+<td>5</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">33118</td>
+<td>Zykir</td>
+<td>M</td>
+<td>5</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">33119</td>
+<td>Zyrus</td>
+<td>M</td>
+<td>5</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">33120</td>
+<td>Zyus</td>
+<td>M</td>
+<td>5</td>
+</tr>
+</tbody>
+</table>
+
+<p>59201 rows × 3 columns</p>
+</div>
+</div>
+</div>
+<ol type="1">
+<li><p>There is no longer any way to distinguish the 1995 data from the 2015 data. To fix this, we can add a <strong>Year</strong> column to each <code>DataFrame</code> before we concatenate.</p></li>
+<li><p>The indexes from the original <code>DataFrames</code> are preserved in the concatenated <code>DataFrame</code>. (To see this, observe that the last index in the <code>DataFrame</code> is about 33000, which corresponds to the number of rows in <code>names2015</code>, even though there are 59000 rows in the <code>DataFrame</code>.) That means that there are two rows with an index of 0, two rows with an index of 1, and so on. To force <code>pandas</code> to generate a completely new index for this <code>DataFrame</code>, ignoring the indices from the original <code>DataFrames</code>, we specify <code>ignore_index=True</code>.</p></li>
+</ol>
+<div id="07fa374b" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>names1995[<span class="st">"Year"</span>] <span class="op">=</span> <span class="dv">1995</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>names2015[<span class="st">"Year"</span>] <span class="op">=</span> <span class="dv">2015</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>names <span class="op">=</span> pd.concat([names1995, names2015], ignore_index<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>names</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="5">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Name</th>
+<th data-quarto-table-cell-role="th">Sex</th>
+<th data-quarto-table-cell-role="th">Count</th>
+<th data-quarto-table-cell-role="th">Year</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>Jessica</td>
+<td>F</td>
+<td>27935</td>
+<td>1995</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>Ashley</td>
+<td>F</td>
+<td>26603</td>
+<td>1995</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>Emily</td>
+<td>F</td>
+<td>24378</td>
+<td>1995</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>Samantha</td>
+<td>F</td>
+<td>21646</td>
+<td>1995</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>Sarah</td>
+<td>F</td>
+<td>21369</td>
+<td>1995</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">59196</td>
+<td>Zykell</td>
+<td>M</td>
+<td>5</td>
+<td>2015</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">59197</td>
+<td>Zyking</td>
+<td>M</td>
+<td>5</td>
+<td>2015</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">59198</td>
+<td>Zykir</td>
+<td>M</td>
+<td>5</td>
+<td>2015</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">59199</td>
+<td>Zyrus</td>
+<td>M</td>
+<td>5</td>
+<td>2015</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">59200</td>
+<td>Zyus</td>
+<td>M</td>
+<td>5</td>
+<td>2015</td>
+</tr>
+</tbody>
+</table>
+
+<p>59201 rows × 4 columns</p>
+</div>
+</div>
+</div>
+<p>Now this is a <code>DataFrame</code> we can use!</p>
+</section>
+<section id="merging-a.k.a-joining" class="level4" data-number="5.3.1.2">
+<h4 data-number="5.3.1.2" class="anchored" data-anchor-id="merging-a.k.a-joining"><span class="header-section-number">5.3.1.2</span> Merging (a.k.a Joining)</h4>
+<p>More commonly, the data sets that we want to combine actually contain different information about the same observations. In other words, instead of stacking the <code>DataFrames</code> on top of each other, as in concatenation, we want to stack them next to each other. The process of combining columns or variables from different data sets is known as <em>merging</em> or <em>joining</em>.</p>
+<p>The observations may be in a different order in the two data sets, so merging is not as simple as placing the two <code>DataFrames</code> side-by-side.</p>
+<p><em>Merging</em> is an operation on two <code>DataFrames</code> that returns a third <code>DataFrame</code>. By convention, the first <code>DataFrame</code> is referred to as the one on the “left”, while the second <code>DataFrame</code> is the one on the “right”.</p>
+<p>This naming convention is reflected in the syntax of the <code>.merge()</code> function in <code>pandas</code>. In the code below, the “left” <code>DataFrame</code>, <code>names1995</code>, is quite literally on the left in the code, while the “right” <code>DataFrame</code>, <code>names2015</code>, is to the right. We also specify the variables to match across the two <code>DataFrames</code>.</p>
+<div id="457a2337" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>names1995.merge(names2015, on<span class="op">=</span>[<span class="st">"Name"</span>, <span class="st">"Sex"</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="6">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Name</th>
+<th data-quarto-table-cell-role="th">Sex</th>
+<th data-quarto-table-cell-role="th">Count_x</th>
+<th data-quarto-table-cell-role="th">Year_x</th>
+<th data-quarto-table-cell-role="th">Count_y</th>
+<th data-quarto-table-cell-role="th">Year_y</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>Jessica</td>
+<td>F</td>
+<td>27935</td>
+<td>1995</td>
+<td>1587</td>
+<td>2015</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>Ashley</td>
+<td>F</td>
+<td>26603</td>
+<td>1995</td>
+<td>3424</td>
+<td>2015</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>Emily</td>
+<td>F</td>
+<td>24378</td>
+<td>1995</td>
+<td>11786</td>
+<td>2015</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>Samantha</td>
+<td>F</td>
+<td>21646</td>
+<td>1995</td>
+<td>5340</td>
+<td>2015</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>Sarah</td>
+<td>F</td>
+<td>21369</td>
+<td>1995</td>
+<td>4521</td>
+<td>2015</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">15675</td>
+<td>Zephan</td>
+<td>M</td>
+<td>5</td>
+<td>1995</td>
+<td>23</td>
+<td>2015</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">15676</td>
+<td>Zeppelin</td>
+<td>M</td>
+<td>5</td>
+<td>1995</td>
+<td>70</td>
+<td>2015</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">15677</td>
+<td>Zerek</td>
+<td>M</td>
+<td>5</td>
+<td>1995</td>
+<td>5</td>
+<td>2015</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">15678</td>
+<td>Ziggy</td>
+<td>M</td>
+<td>5</td>
+<td>1995</td>
+<td>44</td>
+<td>2015</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">15679</td>
+<td>Zyon</td>
+<td>M</td>
+<td>5</td>
+<td>1995</td>
+<td>148</td>
+<td>2015</td>
+</tr>
+</tbody>
+</table>
+
+<p>15680 rows × 6 columns</p>
+</div>
+</div>
+</div>
+<p>The <strong>most important component</strong> of <em>merging</em> two datasets is the presence of at least one <em>key</em> variable that both datasets share. This variable is sometimes referred to as an <em>ID variable</em>. It’s this variable that we will want to <em>merge on</em>, i.e.&nbsp;use to combine the two datasets intelligently.</p>
+<p>The variables that we joined on (<code>Name</code> and <code>Sex</code>) appear once in the final <code>DataFrame</code>. The variable <code>Count</code>, which we did not join on, appears twice—since there was a column called <code>Count</code> in both of the original <code>DataFrames</code>. Notice that <code>pandas</code> automatically appended the suffix <code>_x</code> to the name of the variable from the left <code>DataFrame</code> and <code>_y</code> to the one from the right <code>DataFrame</code>. We can customize the suffixes by specifying the <code>suffixes=</code> parameter.</p>
+<div id="b5bcdfb3" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>names1995.merge(names2015, on<span class="op">=</span>[<span class="st">"Name"</span>, <span class="st">"Sex"</span>], suffixes<span class="op">=</span>(<span class="st">"1995"</span>, <span class="st">"2015"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="7">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Name</th>
+<th data-quarto-table-cell-role="th">Sex</th>
+<th data-quarto-table-cell-role="th">Count1995</th>
+<th data-quarto-table-cell-role="th">Year1995</th>
+<th data-quarto-table-cell-role="th">Count2015</th>
+<th data-quarto-table-cell-role="th">Year2015</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>Jessica</td>
+<td>F</td>
+<td>27935</td>
+<td>1995</td>
+<td>1587</td>
+<td>2015</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>Ashley</td>
+<td>F</td>
+<td>26603</td>
+<td>1995</td>
+<td>3424</td>
+<td>2015</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>Emily</td>
+<td>F</td>
+<td>24378</td>
+<td>1995</td>
+<td>11786</td>
+<td>2015</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>Samantha</td>
+<td>F</td>
+<td>21646</td>
+<td>1995</td>
+<td>5340</td>
+<td>2015</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>Sarah</td>
+<td>F</td>
+<td>21369</td>
+<td>1995</td>
+<td>4521</td>
+<td>2015</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">15675</td>
+<td>Zephan</td>
+<td>M</td>
+<td>5</td>
+<td>1995</td>
+<td>23</td>
+<td>2015</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">15676</td>
+<td>Zeppelin</td>
+<td>M</td>
+<td>5</td>
+<td>1995</td>
+<td>70</td>
+<td>2015</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">15677</td>
+<td>Zerek</td>
+<td>M</td>
+<td>5</td>
+<td>1995</td>
+<td>5</td>
+<td>2015</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">15678</td>
+<td>Ziggy</td>
+<td>M</td>
+<td>5</td>
+<td>1995</td>
+<td>44</td>
+<td>2015</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">15679</td>
+<td>Zyon</td>
+<td>M</td>
+<td>5</td>
+<td>1995</td>
+<td>148</td>
+<td>2015</td>
+</tr>
+</tbody>
+</table>
+
+<p>15680 rows × 6 columns</p>
+</div>
+</div>
+</div>
+<p>In the code above, we assumed that the columns that we joined on had the same names in the two data sets. What if they had different names? For example, suppose the variable had been called <code>Sex</code> in one data set and <code>Gender</code> in the other. We can specify which variables to use from the left and right data sets using the <code>left_on=</code> and <code>right_on=</code> parameters.</p>
+<div id="c1745452" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create new DataFrames where the column names are different</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>names2015_ <span class="op">=</span> names2015.rename({<span class="st">"Sex"</span>: <span class="st">"Gender"</span>}, axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co"># This is how you merge them.</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>names1995.merge(</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    names2015_,</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    left_on<span class="op">=</span>(<span class="st">"Name"</span>, <span class="st">"Sex"</span>),</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    right_on<span class="op">=</span>(<span class="st">"Name"</span>, <span class="st">"Gender"</span>)</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="8">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Name</th>
+<th data-quarto-table-cell-role="th">Sex</th>
+<th data-quarto-table-cell-role="th">Count_x</th>
+<th data-quarto-table-cell-role="th">Year_x</th>
+<th data-quarto-table-cell-role="th">Gender</th>
+<th data-quarto-table-cell-role="th">Count_y</th>
+<th data-quarto-table-cell-role="th">Year_y</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>Jessica</td>
+<td>F</td>
+<td>27935</td>
+<td>1995</td>
+<td>F</td>
+<td>1587</td>
+<td>2015</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>Ashley</td>
+<td>F</td>
+<td>26603</td>
+<td>1995</td>
+<td>F</td>
+<td>3424</td>
+<td>2015</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>Emily</td>
+<td>F</td>
+<td>24378</td>
+<td>1995</td>
+<td>F</td>
+<td>11786</td>
+<td>2015</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>Samantha</td>
+<td>F</td>
+<td>21646</td>
+<td>1995</td>
+<td>F</td>
+<td>5340</td>
+<td>2015</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>Sarah</td>
+<td>F</td>
+<td>21369</td>
+<td>1995</td>
+<td>F</td>
+<td>4521</td>
+<td>2015</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">15675</td>
+<td>Zephan</td>
+<td>M</td>
+<td>5</td>
+<td>1995</td>
+<td>M</td>
+<td>23</td>
+<td>2015</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">15676</td>
+<td>Zeppelin</td>
+<td>M</td>
+<td>5</td>
+<td>1995</td>
+<td>M</td>
+<td>70</td>
+<td>2015</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">15677</td>
+<td>Zerek</td>
+<td>M</td>
+<td>5</td>
+<td>1995</td>
+<td>M</td>
+<td>5</td>
+<td>2015</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">15678</td>
+<td>Ziggy</td>
+<td>M</td>
+<td>5</td>
+<td>1995</td>
+<td>M</td>
+<td>44</td>
+<td>2015</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">15679</td>
+<td>Zyon</td>
+<td>M</td>
+<td>5</td>
+<td>1995</td>
+<td>M</td>
+<td>148</td>
+<td>2015</td>
+</tr>
+</tbody>
+</table>
+
+<p>15680 rows × 7 columns</p>
+</div>
+</div>
+</div>
+</section>
+<section id="one-to-one-and-many-to-one-relationships" class="level4" data-number="5.3.1.3">
+<h4 data-number="5.3.1.3" class="anchored" data-anchor-id="one-to-one-and-many-to-one-relationships"><span class="header-section-number">5.3.1.3</span> One-to-One and Many-to-One Relationships</h4>
+<p>In the example above, there was at most one combination of <code>Name</code> and <code>Sex</code> in the 2015 data set for each combination of <code>Name</code> and <code>Sex</code> in the 1995 data set. These two data sets are thus said to have a one-to-one relationship. The same would be true of combining two GapMinder datasets.</p>
+<p>However, two data sets need not have a one-to-one relationship! Two datasets could have a <em>many-to-one relationship</em>. In general, it’s <strong>extremely important</strong> to think carefully about what variables each of your two datasets have to begin with, and what variables you want your merged dataset to have…and what that merged dataset will represent with respect to your data.</p>
+</section>
+<section id="many-to-many-relationships-a-cautionary-tale" class="level4" data-number="5.3.1.4">
+<h4 data-number="5.3.1.4" class="anchored" data-anchor-id="many-to-many-relationships-a-cautionary-tale"><span class="header-section-number">5.3.1.4</span> Many-to-Many Relationships: A Cautionary Tale</h4>
+<p>It is also possible for multiple rows in the left <code>DataFrame</code> to match multiple rows in the right <code>DataFrame</code>. In this case, the two data sets are said to have a <em>many-to-many relationship</em>. Many-to-many joins can lead to misleading analyses, so it is important to exercise caution when working with many-to-many relationships.</p>
+<p>For example, in the baby names data set, the <code>Name</code> variable is not uniquely identifying. For example, there are both males and females with the name “Jessie”.</p>
+<div id="1b6cc45e" class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>jessie1995 <span class="op">=</span> names1995[names1995[<span class="st">"Name"</span>] <span class="op">==</span> <span class="st">"Jessie"</span>]</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>jessie1995</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="9">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Name</th>
+<th data-quarto-table-cell-role="th">Sex</th>
+<th data-quarto-table-cell-role="th">Count</th>
+<th data-quarto-table-cell-role="th">Year</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">248</td>
+<td>Jessie</td>
+<td>F</td>
+<td>1138</td>
+<td>1995</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">16047</td>
+<td>Jessie</td>
+<td>M</td>
+<td>903</td>
+<td>1995</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="31528988" class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>jessie2015 <span class="op">=</span> names2015[names2015[<span class="st">"Name"</span>] <span class="op">==</span> <span class="st">"Jessie"</span>]</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>jessie2015</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="10">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Name</th>
+<th data-quarto-table-cell-role="th">Sex</th>
+<th data-quarto-table-cell-role="th">Count</th>
+<th data-quarto-table-cell-role="th">Year</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">615</td>
+<td>Jessie</td>
+<td>F</td>
+<td>469</td>
+<td>2015</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">20009</td>
+<td>Jessie</td>
+<td>M</td>
+<td>233</td>
+<td>2015</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>If we join these two <code>DataFrames</code> on <code>Name</code>, then we will end up with a many-to-many join, since each “Jessie” row in the 1995 data will be paired with each “Jessie” row in the 2015 data.</p>
+<div id="1259c9d3" class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>jessie1995.merge(jessie2015, on<span class="op">=</span>[<span class="st">"Name"</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="11">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Name</th>
+<th data-quarto-table-cell-role="th">Sex_x</th>
+<th data-quarto-table-cell-role="th">Count_x</th>
+<th data-quarto-table-cell-role="th">Year_x</th>
+<th data-quarto-table-cell-role="th">Sex_y</th>
+<th data-quarto-table-cell-role="th">Count_y</th>
+<th data-quarto-table-cell-role="th">Year_y</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>Jessie</td>
+<td>F</td>
+<td>1138</td>
+<td>1995</td>
+<td>F</td>
+<td>469</td>
+<td>2015</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>Jessie</td>
+<td>F</td>
+<td>1138</td>
+<td>1995</td>
+<td>M</td>
+<td>233</td>
+<td>2015</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>Jessie</td>
+<td>M</td>
+<td>903</td>
+<td>1995</td>
+<td>F</td>
+<td>469</td>
+<td>2015</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>Jessie</td>
+<td>M</td>
+<td>903</td>
+<td>1995</td>
+<td>M</td>
+<td>233</td>
+<td>2015</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>Notice that Jessie ends up appearing four times:</p>
+<ul>
+<li>Female Jessies from 1995 are matched with female Jessies from 2015. (Good!)</li>
+<li>Male Jessies from 1995 are matched with male Jessies from 2015. (Good!)</li>
+<li>Female Jessies from 1995 are matched with male Jessies from 2015. (This is perhaps undesirable.)</li>
+<li>Male Jessies from 1995 are matched with female Jessies from 2015. (Also unexpected and undesirable.)</li>
+</ul>
+<p>If we had used a data set like this to determine the number of Jessies in 1995, then we would end up with the wrong answer, since we would have double-counted both female and male Jessies as a result of the many-to-many join. This is why it is important to exercise caution when working with (potential) many-to-many relationships.</p>
+</section>
+</section>
+<section id="types-of-joins" class="level3" data-number="5.3.2">
+<h3 data-number="5.3.2" class="anchored" data-anchor-id="types-of-joins"><span class="header-section-number">5.3.2</span> Types of Joins</h3>
+<p>Above, we saw how to merge (or join) two data sets by matching on certain variables. But what happens when a row in one <code>DataFrame</code> has no match in the other?</p>
+<p>First, let’s investigate how <code>pandas</code> handles this situation by default. The name “Nevaeh”, which is “heaven” spelled backwards, took after Sonny Sandoval of the band P.O.D. gave his daughter the name in 2000. Let’s look at how common this name was five years earlier and five years after.</p>
+<div id="6625a0f9" class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>data_dir <span class="op">=</span> <span class="st">"http://dlsun.github.io/pods/data/names/"</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>names1995 <span class="op">=</span> pd.read_csv(data_dir <span class="op">+</span> <span class="st">"yob1995.txt"</span>,</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>                        header<span class="op">=</span><span class="va">None</span>, names<span class="op">=</span>[<span class="st">"Name"</span>, <span class="st">"Sex"</span>, <span class="st">"Count"</span>])</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>names2005 <span class="op">=</span> pd.read_csv(data_dir <span class="op">+</span> <span class="st">"yob2005.txt"</span>,</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>                        header<span class="op">=</span><span class="va">None</span>, names<span class="op">=</span>[<span class="st">"Name"</span>, <span class="st">"Sex"</span>, <span class="st">"Count"</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="e8d19726" class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>names1995[names1995.Name <span class="op">==</span> <span class="st">"Nevaeh"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="13">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Name</th>
+<th data-quarto-table-cell-role="th">Sex</th>
+<th data-quarto-table-cell-role="th">Count</th>
+</tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="473e1693" class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>names2005[names2005.Name <span class="op">==</span> <span class="st">"Nevaeh"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="14">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Name</th>
+<th data-quarto-table-cell-role="th">Sex</th>
+<th data-quarto-table-cell-role="th">Count</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">68</td>
+<td>Nevaeh</td>
+<td>F</td>
+<td>4552</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">21353</td>
+<td>Nevaeh</td>
+<td>M</td>
+<td>56</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>In 1995, there were no girls (at least fewer than 5) named Nevaeh; just eight years later, there were over 4500 girls (and even 56 boys) with the name. It seems like Sonny Sandoval had a huge effect.</p>
+<p>What happens to the name “Nevaeh” when we merge the two data sets?</p>
+<div id="2a653eca" class="cell" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>names <span class="op">=</span> names1995.merge(names2005, on<span class="op">=</span>[<span class="st">"Name"</span>, <span class="st">"Sex"</span>])</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>names[names.Name <span class="op">==</span> <span class="st">"Nevaeh"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="15">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Name</th>
+<th data-quarto-table-cell-role="th">Sex</th>
+<th data-quarto-table-cell-role="th">Count_x</th>
+<th data-quarto-table-cell-role="th">Count_y</th>
+</tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>By default, <code>pandas</code> only includes combinations that are present in both <code>DataFrames</code>. If it cannot find a match for a row in one <code>DataFrame</code>, then the combination is simply dropped.</p>
+<p>But in this context, the fact that a name does not appear in one data set is informative. It means that no babies were born in that year with that name. We might want to include names that appeared in only one of the two <code>DataFrames</code>, rather than just the names that appeared in both.</p>
+<p>There are four types of joins, distinguished by whether they include the rows from the left <code>DataFrame</code>, the right <code>DataFrame</code>, both, or neither:</p>
+<ol type="1">
+<li><em>inner join</em> (default): only values that are present in both <code>DataFrames</code> are included in the result</li>
+<li><em>outer join</em>: any value that appears in either <code>DataFrame</code> is included in the result</li>
+<li><em>left join</em>: any value that appears in the left <code>DataFrame</code> is included in the result, whether or not it appears in the right <code>DataFrame</code></li>
+<li><em>right join</em>: any value that appears in the right <code>DataFrame</code> is included in the result, whether or not it appears in the left <code>DataFrame</code>.</li>
+</ol>
+<p>One way to visualize the different types of joins is using Venn diagrams. The shaded region indicates which rows that are included in the output. For example, only rows that appear in both the left and right <code>DataFrames</code> are included in the output of an inner join.</p>
+<p><img src="https://github.com/dlsun/pods/blob/master/09-Joining-Tabular-Data/joins.png?raw=1" class="img-fluid"></p>
+<p>In <code>pandas</code>, the join type is specified using the <code>how=</code> argument.</p>
+<p>Now let’s look at the examples of each of these types of joins.</p>
+<div id="64389c7e" class="cell" data-execution_count="20">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># inner join</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>names_inner <span class="op">=</span> names1995.merge(names2005, on<span class="op">=</span>[<span class="st">"Name"</span>, <span class="st">"Sex"</span>], how<span class="op">=</span><span class="st">"inner"</span>)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>names_inner</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="16">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Name</th>
+<th data-quarto-table-cell-role="th">Sex</th>
+<th data-quarto-table-cell-role="th">Count_x</th>
+<th data-quarto-table-cell-role="th">Count_y</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>Jessica</td>
+<td>F</td>
+<td>27935</td>
+<td>8108</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>Ashley</td>
+<td>F</td>
+<td>26603</td>
+<td>13270</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>Emily</td>
+<td>F</td>
+<td>24378</td>
+<td>23930</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>Samantha</td>
+<td>F</td>
+<td>21646</td>
+<td>13633</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>Sarah</td>
+<td>F</td>
+<td>21369</td>
+<td>11527</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">19119</td>
+<td>Zeppelin</td>
+<td>M</td>
+<td>5</td>
+<td>7</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">19120</td>
+<td>Zerek</td>
+<td>M</td>
+<td>5</td>
+<td>8</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">19121</td>
+<td>Zhen</td>
+<td>M</td>
+<td>5</td>
+<td>7</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">19122</td>
+<td>Ziggy</td>
+<td>M</td>
+<td>5</td>
+<td>6</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">19123</td>
+<td>Zyon</td>
+<td>M</td>
+<td>5</td>
+<td>102</td>
+</tr>
+</tbody>
+</table>
+
+<p>19124 rows × 4 columns</p>
+</div>
+</div>
+</div>
+<div id="1712bfdf" class="cell" data-execution_count="21">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># outer join</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>names_outer <span class="op">=</span> names1995.merge(names2005, on<span class="op">=</span>[<span class="st">"Name"</span>, <span class="st">"Sex"</span>], how<span class="op">=</span><span class="st">"outer"</span>)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>names_outer</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="17">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Name</th>
+<th data-quarto-table-cell-role="th">Sex</th>
+<th data-quarto-table-cell-role="th">Count_x</th>
+<th data-quarto-table-cell-role="th">Count_y</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>Jessica</td>
+<td>F</td>
+<td>27935.0</td>
+<td>8108.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>Ashley</td>
+<td>F</td>
+<td>26603.0</td>
+<td>13270.0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>Emily</td>
+<td>F</td>
+<td>24378.0</td>
+<td>23930.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>Samantha</td>
+<td>F</td>
+<td>21646.0</td>
+<td>13633.0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>Sarah</td>
+<td>F</td>
+<td>21369.0</td>
+<td>11527.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">39490</td>
+<td>Zymiere</td>
+<td>M</td>
+<td>NaN</td>
+<td>5.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">39491</td>
+<td>Zyrell</td>
+<td>M</td>
+<td>NaN</td>
+<td>5.0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">39492</td>
+<td>Zyrian</td>
+<td>M</td>
+<td>NaN</td>
+<td>5.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">39493</td>
+<td>Zyshon</td>
+<td>M</td>
+<td>NaN</td>
+<td>5.0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">39494</td>
+<td>Zytavious</td>
+<td>M</td>
+<td>NaN</td>
+<td>5.0</td>
+</tr>
+</tbody>
+</table>
+
+<p>39495 rows × 4 columns</p>
+</div>
+</div>
+</div>
+<p>Names like “Zyrell” and “Zyron” appeared in the 2005 data but not the 1995 data. For this reason, their count in 1995 is <code>NaN</code>. In general, there will be missing values in <code>DataFrames</code> that result from an outer join. Any time a value appears in one <code>DataFrame</code> but not the other, there will be <code>NaN</code>s in the columns from the <code>DataFrame</code> missing that value.</p>
+<div id="c882803e" class="cell" data-execution_count="22">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>names_inner.isnull().<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="18">
+<pre><code>Name       0
+Sex        0
+Count_x    0
+Count_y    0
+dtype: int64</code></pre>
+</div>
+</div>
+<p>Left and right joins preserve data from one <code>DataFrame</code> but not the other. For example, if we were trying to calculate the percentage change for each name from 1995 to 2005, we would want to include all of the names that appeared in the 1995 data. If the name did not appear in the 2005 data, then that is informative.</p>
+<div id="5e730aa9" class="cell" data-execution_count="23">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># left join</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>names_left <span class="op">=</span> names1995.merge(names2005, on<span class="op">=</span>[<span class="st">"Name"</span>, <span class="st">"Sex"</span>], how<span class="op">=</span><span class="st">"left"</span>)</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>names_left</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="19">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Name</th>
+<th data-quarto-table-cell-role="th">Sex</th>
+<th data-quarto-table-cell-role="th">Count_x</th>
+<th data-quarto-table-cell-role="th">Count_y</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>Jessica</td>
+<td>F</td>
+<td>27935</td>
+<td>8108.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>Ashley</td>
+<td>F</td>
+<td>26603</td>
+<td>13270.0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>Emily</td>
+<td>F</td>
+<td>24378</td>
+<td>23930.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>Samantha</td>
+<td>F</td>
+<td>21646</td>
+<td>13633.0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>Sarah</td>
+<td>F</td>
+<td>21369</td>
+<td>11527.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">26075</td>
+<td>Zerek</td>
+<td>M</td>
+<td>5</td>
+<td>8.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">26076</td>
+<td>Zhen</td>
+<td>M</td>
+<td>5</td>
+<td>7.0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">26077</td>
+<td>Ziggy</td>
+<td>M</td>
+<td>5</td>
+<td>6.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">26078</td>
+<td>Zuberi</td>
+<td>M</td>
+<td>5</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">26079</td>
+<td>Zyon</td>
+<td>M</td>
+<td>5</td>
+<td>102.0</td>
+</tr>
+</tbody>
+</table>
+
+<p>26080 rows × 4 columns</p>
+</div>
+</div>
+</div>
+<p>The result of the left join has <code>NaN</code>s in the columns from the right <code>DataFrame</code>.</p>
+<div id="75f23b8d" class="cell" data-execution_count="24">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>names_left.isnull().<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="20">
+<pre><code>Name          0
+Sex           0
+Count_x       0
+Count_y    6956
+dtype: int64</code></pre>
+</div>
+</div>
+<p>The result of the right join, on the other hand, has <code>NaN</code>s in the column from the left <code>DataFrame</code>.</p>
+<div id="9f1eca4c" class="cell" data-execution_count="25">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># right join</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>names_right <span class="op">=</span> names1995.merge(names2005, on<span class="op">=</span>[<span class="st">"Name"</span>, <span class="st">"Sex"</span>], how<span class="op">=</span><span class="st">"right"</span>)</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>names_right</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="21">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Name</th>
+<th data-quarto-table-cell-role="th">Sex</th>
+<th data-quarto-table-cell-role="th">Count_x</th>
+<th data-quarto-table-cell-role="th">Count_y</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>Emily</td>
+<td>F</td>
+<td>24378.0</td>
+<td>23930</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>Emma</td>
+<td>F</td>
+<td>5041.0</td>
+<td>20335</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>Madison</td>
+<td>F</td>
+<td>9775.0</td>
+<td>19562</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>Abigail</td>
+<td>F</td>
+<td>7821.0</td>
+<td>15747</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>Olivia</td>
+<td>F</td>
+<td>7624.0</td>
+<td>15691</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">32534</td>
+<td>Zymiere</td>
+<td>M</td>
+<td>NaN</td>
+<td>5</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">32535</td>
+<td>Zyrell</td>
+<td>M</td>
+<td>NaN</td>
+<td>5</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">32536</td>
+<td>Zyrian</td>
+<td>M</td>
+<td>NaN</td>
+<td>5</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">32537</td>
+<td>Zyshon</td>
+<td>M</td>
+<td>NaN</td>
+<td>5</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">32538</td>
+<td>Zytavious</td>
+<td>M</td>
+<td>NaN</td>
+<td>5</td>
+</tr>
+</tbody>
+</table>
+
+<p>32539 rows × 4 columns</p>
+</div>
+</div>
+</div>
+<div id="71d34103" class="cell" data-execution_count="26">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>names_right.isnull().<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="22">
+<pre><code>Name           0
+Sex            0
+Count_x    13415
+Count_y        0
+dtype: int64</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-check-in no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Check In
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Download a second GapMinder dataset and merge it with the population dataset from above. Did you have to pivot first? Which order of operations makes the most sense? Is your resulting dataset <em>tidy</em>?</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-practice-exercise no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Practice Activity
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><a href="https://colab.research.google.com/drive/12zB93Tb-f1lln5AtX8q1iHv6thlDb4aO?usp=sharing">Click here</a> to solve a riddle using data manipulation.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="data-wrangling-and-ai" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="data-wrangling-and-ai"><span class="header-section-number">5.4</span> Data Wrangling and AI</h2>
+<p>The advice in this section applies to data analysis tasks in general, not only to the basic wrangling and summarizing in this chapter - but since this is our first foray in to data wrangling code, let’s dive right in!</p>
+<p>In data processing and summarizing, we can think of four main ways that genAI can support your work. <a href="https://chatgpt.com/share/671211e0-6698-8012-889f-c7206aba3d65">In this chat</a>, we make use of all four of the steps below; open it up and follow along.</p>
+<section id="as-a-planner-to-help-you-chart-out-your-wrangling-steps." class="level4" data-number="5.4.0.1">
+<h4 data-number="5.4.0.1" class="anchored" data-anchor-id="as-a-planner-to-help-you-chart-out-your-wrangling-steps."><span class="header-section-number">5.4.0.1</span> 1. As a <strong>planner</strong>, to help you chart out your wrangling steps.</h4>
+<p>Data analysis involves going from Point A (your current dataset) to Point B (your desired calculation or visualization). One of the most difficult aspects of data science is figuring out what intermediate steps will get you there. For this, a genAI tool can be a great “thinking buddy” and suggest a path forward.</p>
+<p>Although it may not give a perfect solution (especially since it typically cannot see your data), two heads are often better than one. The generated suggestions may include data cleaning steps you hadn’t thought of, or help you fill in a gap when you are stuck.</p>
+<p>As always, you will get your best results if your prompt is <strong>well-specified:</strong> make sure to describe the structure of the dataset you have, and the exact nature of the output you are trying to produce.</p>
+<div class="callout callout-style-default callout-example no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Example
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In our chat example, we got back some pretty useful steps, including a great reminder to make sure our date-time data is the proper <em>type</em>. However, because we weren’t overly detailed about the dataset, the AI had to “guess” about which columns existed. And since we also didn’t clarify what we wanted our plot to look like, it had to offer an “optional” Step 6.</p>
+</div>
+</div>
+</section>
+<section id="as-documentation-when-you-are-struggling-with-the-exact-use-case-or-syntax-of-a-function." class="level4" data-number="5.4.0.2">
+<h4 data-number="5.4.0.2" class="anchored" data-anchor-id="as-documentation-when-you-are-struggling-with-the-exact-use-case-or-syntax-of-a-function."><span class="header-section-number">5.4.0.2</span> 2. As <strong>documentation</strong>, when you are struggling with the exact use case or syntax of a function.</h4>
+<p>It is extremely common in coding to know what function(s) you need for your task, but to be a little fuzzy on the details of how to make then run the way you want. While the information you need can technically always be found in the official documentation of the functions, these can sometimes be difficult to understand. One of the absolute <em>strongest contributions</em> of genAI is the ability to generate <strong>examples</strong> and to explain every step. In this regard, the AI tool is much like a human tutor!</p>
+<div class="callout callout-style-default callout-example no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Example
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In our demo chat, we see that the AI was able to explain the <code>to_datetime()</code> function to us in great detail, including several examples of when you might need to use common optional arguments like <code>format</code> or <code>errors</code>.</p>
+</div>
+</div>
+</section>
+<section id="as-a-search-tool-when-you-want-to-find-the-perfect-function." class="level4" data-number="5.4.0.3">
+<h4 data-number="5.4.0.3" class="anchored" data-anchor-id="as-a-search-tool-when-you-want-to-find-the-perfect-function."><span class="header-section-number">5.4.0.3</span> 3. As a <strong>search tool</strong>, when you want to find the perfect function.</h4>
+<p>The beauty of packages like <code>pandas</code> is that many, many functions are provided to give you “shortcuts” for common data tasks. The curse is that you don’t always know if a particular function exists!</p>
+<p>Certainly, it is possible to look in official documentation - but this can be tedious and involve guessing which functions <em>might</em> solve your problem by their name alone. A better option might be a static search service, like Google - but to trigger useful results, you often need to use key words that precisely describe what you are looking for.</p>
+<p>Since genAI tools can interpret human-style text, they are often able to understand what you are looking for and help you find the perfect function.</p>
+<div class="callout callout-style-default callout-example no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Example
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In response to our question about misspellings in the dataset, the genAI offered two solutions: a simple one for when the possible misspellings are known, and a complex one for general use. In the second solution, it suggested an additional library called <code>fuzzywuzzy</code>.</p>
+</div>
+</div>
+</section>
+<section id="as-a-debugger-when-you-can-spot-where-in-your-analysis-something-is-going-wrong." class="level4" data-number="5.4.0.4">
+<h4 data-number="5.4.0.4" class="anchored" data-anchor-id="as-a-debugger-when-you-can-spot-where-in-your-analysis-something-is-going-wrong."><span class="header-section-number">5.4.0.4</span> 4. As a <strong>debugger</strong>, when you can spot where in your analysis something is going wrong.</h4>
+<div class="callout callout-style-default callout-example no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Example
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Here we wanted to take the mean of a column called <code>num_admitted</code>, grouped by <code>hour</code> and <code>severity</code>. Unfortunately we made an extremely common mistake of putting the column name inside the <code>mean()</code> function. The genAI tool was able to explain why this approach is wrong, and offer possible solutions.</p>
+</div>
+</div>
+</section>
+<section id="cautionary-tales-and-advice" class="level3" data-number="5.4.1">
+<h3 data-number="5.4.1" class="anchored" data-anchor-id="cautionary-tales-and-advice"><span class="header-section-number">5.4.1</span> Cautionary tales and advice</h3>
+<section id="debugging-works-best-on-small-pieces" class="level4" data-number="5.4.1.1">
+<h4 data-number="5.4.1.1" class="anchored" data-anchor-id="debugging-works-best-on-small-pieces"><span class="header-section-number">5.4.1.1</span> Debugging works best on small pieces</h4>
+<p>Suppose you write out your full end-to-end data analysis, without testing or checking any intermediate steps, and it does not work as you hoped. Would you put the whole thing into an LLM for help?</p>
+<p>While this may work in some straightforward cases, it also may confuse and frustrate you more, as the AI suggests a long list of possible issues for you to comb through.</p>
+<p>Instead, we recommend stepping through your analysis line by line, until you reach a step where the results are not what you intended. (This is good troubleshooting strategy already, and you might find your bug before you even turn to an AI tool!) Then, you can ask the AI about only one or two lines of code that aren’t working, and get a more direct and helpful answer.</p>
+</section>
+<section id="beware-of-hallucinations" class="level4" data-number="5.4.1.2">
+<h4 data-number="5.4.1.2" class="anchored" data-anchor-id="beware-of-hallucinations"><span class="header-section-number">5.4.1.2</span> Beware of hallucinations</h4>
+<p>Keep in mind that a genAI response is not the same as a systematic search: it is producing output trying to mimic what it has seen in the training data.</p>
+<p>This means that if you ask for a function for a particular task, an AI tool <strong>might</strong> simply <em>invent</em> a function that seems similar to others it has seen in training. As AI tools are improving, and training data sources for python code are increasing, hallucinations about code are becoming quite rare. However, it’s important to be aware that AI-produced suggestions are not equivalent to finding the function in official documentation; you’ll need to verify for yourself.</p>
+
+
+</section>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/DS-ML-with-python\.github\.io\/Course-Textbook\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./03-basic_data_operations.html" class="pagination-link" aria-label="Tabular Data and Basic Data Operations">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Tabular Data and Basic Data Operations</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./05-function_writing.html" class="pagination-link" aria-label="Writing Custom Functions">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Writing Custom Functions</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/DS-ML-with-python/Course-Textbook/edit/main/04-pivoting_joining.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div></div></footer></body></html>
