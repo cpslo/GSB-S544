@@ -3747,10 +3747,12 @@ display: block;
 </div>
 <p>Let’s use <code>bill_length_mm</code> to predict <code>bill_depth_mm</code>. Prepare your data and fit the following models on the entire dataset:</p>
 <ul>
-<li>Four different models, each containing a different set of predictor variables</li>
+<li>Simple linear regression (e.g. straight-line) model</li>
+<li>Quadratic (degree 2 polynomial) model</li>
+<li>Cubic (degree 3 polynomial) model</li>
+<li>Degree 10 polynomial model</li>
 </ul>
-<p>Create a plot like the right plot of Fig 1. in our <code>Model Validation</code> chapter with the training and test error plotted for each of your four models.</p>
-<p>Which of your models was best?</p>
+<p>Make predictions for each model and plot your fitted models on the scatterplot.</p>
 <section id="simple-linear-regression" class="level3">
 <h3 class="anchored" data-anchor-id="simple-linear-regression">Simple linear regression</h3>
 <div id="cell-13" class="cell" data-execution_count="11">
@@ -4167,7 +4169,9 @@ display: block;
 </div>
 </div>
 <ul>
-<li>Which of your models was best?</li>
+<li>Are any of the models above underfitting the data? If so, which ones and how can you tell?</li>
+<li>Are any of thhe models above overfitting the data? If so, which ones and how can you tell?</li>
+<li>Which of the above models do you think fits the data best and why?</li>
 </ul>
 <ol type="1">
 <li><strong>Underfitting</strong>:
